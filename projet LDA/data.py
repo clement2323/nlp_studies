@@ -217,11 +217,11 @@ def reduce_vocab(vocab, embed_vocab, bow_data, embed_aggregate='mean'):
     """
     vocab = np.array(vocab)
     short = np.array([len(w) > 2 for w in vocab])
-    stop_words = set(stopwords.words('english'))
+    stop_words = set(stopwords.words('french'))
     stop = np.array([w not in stop_words for w in vocab])
     reduced_vocab = vocab[np.logical_and(short, stop)]
     reduced_bow_data = bow_data[:, np.logical_and(short, stop)]
-    stemmer = SnowballStemmer("english")
+    stemmer = SnowballStemmer("french")
 
     stemmed_dict = {}
     
@@ -264,6 +264,8 @@ def reduce_vocab(vocab, embed_vocab, bow_data, embed_aggregate='mean'):
     return (stemmed_reduced_vocab,
             stemmed_reduced_embed_vocab,
             stemmed_reduced_bow_data)
+
+
 
 def print_top_words(model, feature_names, number_of_top_words=20):
     """print top words by topic in a given model
